@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INTENSE Tarif-Ermittler - Homepage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #F5F7FB;
+      color: #1f2937;
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Subtle texture background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 80px;
+    }
+
+    /* Navigation */
+    .nav {
+      background: linear-gradient(90deg, #0F172A 0%, #1e3a8a 50%, #1D4ED8 100%);
+      color: white;
+      padding: 20px 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand h1 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-brand p {
+      font-size: 12px;
+      opacity: 0.85;
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      opacity: 0.9;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+    }
+
+    .nav-logo {
+      height: 40px;
+      padding: 0 16px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 0.15em;
+      font-weight: 600;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 100px 0 80px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .hero-content h2 {
+      font-size: 48px;
+      font-weight: 700;
+      color: #0F172A;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-content p {
+      font-size: 18px;
+      color: #475569;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    .btn-primary {
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #1D4ED8, #2563eb);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 10px 15px -3px rgba(29, 78, 216, 0.3);
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 25px -5px rgba(29, 78, 216, 0.4);
+    }
+
+    /* Chatbot Preview */
+    .chatbot-preview {
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      border: 1px solid rgba(229, 231, 235, 0.5);
+    }
+
+    .preview-header {
+      background: linear-gradient(90deg, #0f172a, #1e3a8a, #312e81);
+      color: white;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .preview-header-icon {
+      background: linear-gradient(135deg, #60a5fa, #6366f1);
+      padding: 10px;
+      border-radius: 10px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preview-header-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: white;
+      fill: none;
+      stroke-width: 2.5;
+    }
+
+    .preview-header-text h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .preview-header-text p {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .preview-body {
+      padding: 24px;
+      background: linear-gradient(180deg, rgba(249, 250, 251, 0.3), rgba(255, 255, 255, 0.5));
+      min-height: 280px;
+    }
+
+    .preview-message {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .preview-message.user {
+      flex-direction: row-reverse;
+    }
+
+    .preview-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .preview-avatar.bot {
+      background: linear-gradient(135deg, #475569, #334155);
+    }
+
+    .preview-avatar.user {
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+    }
+
+    .preview-avatar svg {
+      width: 16px;
+      height: 16px;
+      stroke: white;
+      fill: none;
+      stroke-width: 2.5;
+    }
+
+    .preview-bubble {
+      padding: 12px 16px;
+      border-radius: 12px;
+      max-width: 75%;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .preview-message.bot .preview-bubble {
+      background: white;
+      color: #1f2937;
+      border: 1px solid #f3f4f6;
+      border-top-left-radius: 4px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+    }
+
+    .preview-message.user .preview-bubble {
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      color: white;
+      border-top-right-radius: 4px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .preview-input {
+      padding: 16px 24px;
+      border-top: 1px solid #e5e7eb;
+      background: white;
+      display: flex;
+      gap: 12px;
+    }
+
+    .preview-input input {
+      flex: 1;
+      padding: 10px 14px;
+      border: 2px solid #e5e7eb;
+      border-radius: 10px;
+      font-size: 14px;
+      background: #f9fafb;
+      font-family: inherit;
+    }
+
+    .preview-input button {
+      background: linear-gradient(90deg, #2563eb, #4f46e5);
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .preview-input button svg {
+      width: 16px;
+      height: 16px;
+      stroke: white;
+      fill: none;
+      stroke-width: 2.5;
+    }
+
+    /* Trust Section */
+    .trust-section {
+      padding: 60px 0;
+      background: white;
+      position: relative;
+      z-index: 10;
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .trust-card {
+      text-align: center;
+      padding: 32px 24px;
+      border-radius: 16px;
+      background: #F5F7FB;
+      border: 1px solid #e5e7eb;
+      transition: all 0.3s;
+    }
+
+    .trust-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.1);
+    }
+
+    .trust-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .trust-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: white;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .trust-card h4 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #0F172A;
+      margin-bottom: 8px;
+    }
+
+    .trust-card p {
+      font-size: 15px;
+      color: #64748b;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    .footer {
+      background: #0F172A;
+      color: white;
+      padding: 40px 0;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+    }
+
+    .footer p {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    /* Floating Chat Button */
+    .chat-float-button {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, #1D4ED8, #2563eb);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 12px 24px -4px rgba(29, 78, 216, 0.4);
+      transition: all 0.3s;
+      z-index: 1000;
+      border: none;
+    }
+
+    .chat-float-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 20px 40px -8px rgba(29, 78, 216, 0.5);
+    }
+
+    .chat-float-button svg {
+      width: 32px;
+      height: 32px;
+      stroke: white;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .chat-float-button.hidden {
+      display: none;
+    }
+
+    /* Chat Panel */
+    .chat-panel {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 420px;
+      height: 600px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(40px);
+      border-radius: 24px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(229, 231, 235, 0.5);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 1001;
+      animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .chat-panel.open {
+      display: flex;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .chat-panel-header {
+      background: linear-gradient(90deg, #0f172a, #1e3a8a, #312e81);
+      color: white;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chat-panel-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: rgba(59, 130, 246, 0.1);
+      border-radius: 50%;
+      filter: blur(60px);
+    }
+
+    .chat-panel-info {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .chat-panel-icon {
+      background: linear-gradient(135deg, #60a5fa, #6366f1);
+      padding: 10px;
+      border-radius: 10px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chat-panel-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: white;
+      fill: none;
+      stroke-width: 2.5;
+    }
+
+    .chat-panel-title h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .chat-panel-status {
+      font-size: 12px;
+      opacity: 0.8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .chat-panel-close {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      position: relative;
+      z-index: 10;
+    }
+
+    .chat-panel-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .chat-panel-body {
+      flex: 1;
+      padding: 24px;
+      overflow-y: auto;
+      background: linear-gradient(180deg, rgba(249, 250, 251, 0.3), rgba(255, 255, 255, 0.5));
+      scrollbar-width: thin;
+      scrollbar-color: #cbd5e1 transparent;
+    }
+
+    .chat-panel-body::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .chat-panel-body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .chat-panel-body::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 3px;
+    }
+
+    .message-wrapper {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      animation: messageSlideIn 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    @keyframes messageSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .message-wrapper.user {
+      flex-direction: row-reverse;
+    }
+
+    .avatar {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .avatar.user-avatar {
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+    }
+
+    .avatar.bot-avatar {
+      background: linear-gradient(135deg, #475569, #334155);
+    }
+
+    .avatar svg {
+      width: 18px;
+      height: 18px;
+      stroke: white;
+      stroke-width: 2.5;
+      fill: none;
+    }
+
+    .message-content {
+      display: flex;
+      flex-direction: column;
+      max-width: 75%;
+    }
+
+    .user .message-content {
+      align-items: flex-end;
+    }
+
+    .message-bubble {
+      padding: 12px 16px;
+      border-radius: 14px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+      line-height: 1.5;
+      font-size: 15px;
+    }
+
+    .user .message-bubble {
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      color: white;
+      border-top-right-radius: 4px;
+    }
+
+    .bot .message-bubble {
+      background: white;
+      color: #1f2937;
+      border: 1px solid #f3f4f6;
+      border-top-left-radius: 4px;
+    }
+
+    .timestamp {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 4px;
+      padding: 0 6px;
+    }
+
+    .chat-panel-input {
+      padding: 20px 24px;
+      border-top: 1px solid rgba(229, 231, 235, 0.5);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(8px);
+      display: flex;
+      gap: 12px;
+    }
+
+    .chat-panel-input input {
+      flex: 1;
+      padding: 12px 18px;
+      font-size: 15px;
+      border-radius: 14px;
+      border: 2px solid #e5e7eb;
+      outline: none;
+      background: #f9fafb;
+      box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .chat-panel-input input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .chat-panel-input button {
+      background: linear-gradient(90deg, #2563eb, #4f46e5);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 14px;
+      cursor: pointer;
+      box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chat-panel-input button:hover:not(:disabled) {
+      background: linear-gradient(90deg, #1d4ed8, #4338ca);
+      transform: scale(1.02);
+    }
+
+    .chat-panel-input button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .chat-panel-input button svg {
+      width: 18px;
+      height: 18px;
+      stroke: white;
+      stroke-width: 2.5;
+      fill: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .container {
+        padding: 0 40px;
+      }
+
+      .hero-grid {
+        gap: 40px;
+      }
+
+      .hero-content h2 {
+        font-size: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .hero-content h2 {
+        font-size: 36px;
+      }
+
+      .trust-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .chat-panel {
+        width: calc(100vw - 32px);
+        height: calc(100vh - 64px);
+        right: 16px;
+        bottom: 16px;
+      }
+
+      .chat-float-button {
+        right: 16px;
+        bottom: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <div class="nav-content">
+      <div class="nav-brand">
+        <h1>Intense Tarif-Ermittler</h1>
+        <p>Finden Sie Ihren perfekten Energietarif – intelligent und schnell</p>
+      </div>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="#produkt">Produkt</a></li>
+          <li><a href="#funktion">So funktioniert's</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+        <div class="nav-logo">INTENSE</div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <!-- Left Content -->
+      <div class="hero-content">
+        <h2>Energietarif finden in Minuten.</h2>
+        <p>Geben Sie Verbrauch und Postleitzahl an – wir ermitteln den passenden Tarif.</p>
+        <button class="btn-primary" onclick="openChat()">Tarif ermitteln</button>
+      </div>
+
+      <!-- Right Visual - Chatbot Preview -->
+      <div>
+        <div class="chatbot-preview">
+          <div class="preview-header">
+            <div class="preview-header-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>
+              </svg>
+            </div>
+            <div class="preview-header-text">
+              <h3>Intense Tarif-Ermittler</h3>
+              <p>Intelligent und schnell</p>
+            </div>
+          </div>
+          <div class="preview-body">
+            <div class="preview-message bot">
+              <div class="preview-avatar bot">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+              </div>
+              <div class="preview-bubble">
+                👋 Willkommen! Ich helfe Ihnen, den passenden Energietarif zu finden.
+              </div>
+            </div>
+            <div class="preview-message user">
+              <div class="preview-avatar user">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+              </div>
+              <div class="preview-bubble">
+                Ich suche einen günstigen Stromtarif
+              </div>
+            </div>
+            <div class="preview-message bot">
+              <div class="preview-avatar bot">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+              </div>
+              <div class="preview-bubble">
+                Perfekt! Wie hoch ist Ihr jährlicher Stromverbrauch in kWh?
+              </div>
+            </div>
+          </div>
+          <div class="preview-input">
+            <input type="text" placeholder="Ihre Antwort eingeben…" disabled />
+            <button disabled>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="m22 2-7 20-4-9-9-4Z"/>
+                <path d="M22 2 11 13"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Section -->
+<section class="trust-section">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="trust-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h4>DSGVO-konform</h4>
+        <p>Ihre Daten sind sicher und werden verschlüsselt übertragen</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <h4>Schnell & präzise</h4>
+        <p>Sofortige Tarif-Empfehlungen basierend auf Ihren Angaben</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <rect width="20" height="14" x="2" y="5" rx="2"/>
+            <line x1="2" x2="22" y1="10" y2="10"/>
+          </svg>
+        </div>
+        <h4>Transparente Preise</h4>
+        <p>Keine versteckten Kosten oder Gebühren</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section   id="kontakt" style="padding: 8%;">
+  <div class="hero-content">
+    <h2>Kontakt</h2>
+    <p>Für Support und Anfragen nutzen wir automatisierte Kanäle: unseren E-Mail und Telegram.</p>
+    <h4>Telegram : <a href="https://t.me/tarrifff_bot" target="_blank">Tarif_bot</a></h4>
+    <h4>E-Mail : <a href="https://mail.google.com/mail/?view=cm&fs=1&to=azhlikai@gmail.com" target="_blank" rel="noopener">
+  azhlikai@gmail.com
+</a>
+</h4>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <p>© 2026 INTENSE AG. Alle Rechte vorbehalten.</p>
+      <ul class="footer-links">
+        <li><a href="#impressum">Impressum</a></li>
+        <li><a href="#datenschutz">Datenschutz</a></li>
+        <li><a href="#agb">AGB</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating Chat Button -->
+<button class="chat-float-button" id="chatFloatBtn" onclick="openChat()">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </svg>
+</button>
+
+<!-- Chat Panel -->
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-panel-header">
+    <div class="chat-panel-info">
+      <div class="chat-panel-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>
+        </svg>
+      </div>
+      <div class="chat-panel-title">
+        <h3>Intense Tarif-Ermittler</h3>
+        <div class="chat-panel-status">
+          <span class="status-dot"></span>
+          <span>Online</span>
+        </div>
+      </div>
+    </div>
+    <button class="chat-panel-close" onclick="closeChat()">×</button>
+  </div>
+  
+  <div class="chat-panel-body" id="chatBody">
+    <div class="message-wrapper bot">
+      <div class="avatar bot-avatar">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12 8V4H8"/>
+          <rect width="16" height="12" x="4" y="8" rx="2"/>
+          <path d="M2 14h2"/>
+          <path d="M20 14h2"/>
+          <path d="M15 13v2"/>
+          <path d="M9 13v2"/>
+        </svg>
+      </div>
+      <div class="message-content">
+        <div class="message-bubble">
+          👋 Willkommen! Ich helfe Ihnen, den passenden Energietarif zu finden.<br><br>Bitte beantworten Sie meine Fragen.
+        </div>
+        <div class="timestamp">14:32</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="chat-panel-input">
+    <input type="text" id="userInput" placeholder="Ihre Antwort eingeben…" />
+    <button onclick="sendMessage()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="m22 2-7 20-4-9-9-4Z"/>
+        <path d="M22 2 11 13"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  // N8N Configuration
+  const N8N_URL = "https://n8nprod.trythis.cfd/webhook/d68d05ae-6642-4624-92fa-c5ce1debbcb0";
+  
+  // Session Management
+  let sessionId = localStorage.getItem("sessionId");
+  if (!sessionId) {
+    sessionId = crypto.randomUUID();
+    localStorage.setItem("sessionId", sessionId);
+  }
+
+  // Chat Panel Functions
+  function openChat() {
+    document.getElementById('chatPanel').classList.add('open');
+    document.getElementById('chatFloatBtn').classList.add('hidden');
+    document.getElementById('userInput').focus();
+  }
+
+  function closeChat() {
+    document.getElementById('chatPanel').classList.remove('open');
+    document.getElementById('chatFloatBtn').classList.remove('hidden');
+  }
+
+  // Message Functions
+  function addMessage(text, sender) {
+    const chatBody = document.getElementById('chatBody');
+    const time = new Date().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+    
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('message-wrapper', sender);
+    
+    const avatar = document.createElement('div');
+    avatar.classList.add('avatar', sender === 'user' ? 'user-avatar' : 'bot-avatar');
+    
+    if (sender === 'user') {
+      avatar.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
+    } else {
+      avatar.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>`;
+    }
+    
+    const content = document.createElement('div');
+    content.classList.add('message-content');
+    
+    const bubble = document.createElement('div');
+    bubble.classList.add('message-bubble');
+    bubble.innerHTML = text.replace(/\n/g, '<br>');
+    
+    const timestamp = document.createElement('div');
+    timestamp.classList.add('timestamp');
+    timestamp.textContent = time;
+    
+    content.appendChild(bubble);
+    content.appendChild(timestamp);
+    wrapper.appendChild(avatar);
+    wrapper.appendChild(content);
+    chatBody.appendChild(wrapper);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  function showTyping() {
+    const chatBody = document.getElementById('chatBody');
+    const typing = document.createElement('div');
+    typing.id = 'typing';
+    typing.innerHTML = `
+      <div class="message-wrapper bot">
+        <div class="avatar bot-avatar">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 8V4H8"/>
+            <rect width="16" height="12" x="4" y="8" rx="2"/>
+            <path d="M2 14h2"/>
+            <path d="M20 14h2"/>
+            <path d="M15 13v2"/>
+            <path d="M9 13v2"/>
+          </svg>
+        </div>
+        <div class="message-content">
+          <div class="message-bubble" style="font-style: italic; opacity: 0.7;">Wird getippt...</div>
+        </div>
+      </div>
+    `;
+    chatBody.appendChild(typing);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  function removeTyping() {
+    const typing = document.getElementById('typing');
+    if (typing) typing.remove();
+  }
+
+  function sendMessage() {
+    const input = document.getElementById('userInput');
+    const text = input.value.trim();
+    if (!text) return;
+
+    addMessage(text, 'user');
+    input.value = '';
+    input.disabled = true;
+    showTyping();
+
+    fetch(N8N_URL, {
+      method: "POST",
+      headers: { 
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+        "Access-Control-Allow-Headers": "*" 
+      },
+      body: JSON.stringify({
+        message: text,
+        sessionId: sessionId
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      removeTyping();
+      addMessage(data.output || "❌ Keine Antwort erhalten.", 'bot');
+    })
+    .catch(() => {
+      removeTyping();
+      addMessage("❌ Fehler bei der Verbindung zum Server.", 'bot');
+    })
+    .finally(() => {
+      input.disabled = false;
+      input.focus();
+    });
+  }
+
+  // Enter key to send
+  document.getElementById('userInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendMessage();
+  });
+</script>
+
+</body>
+</html>
